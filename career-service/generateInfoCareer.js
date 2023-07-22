@@ -8,6 +8,10 @@ async function generateInfoCareer({ pathPDF, gestion }) {
     `./careers-datas-json/${gestion}/${nameFileJson}.json`,
     JSON.stringify(content)
   );
+
+  return {
+    nameFileJson,
+  };
 }
 
 module.exports = {

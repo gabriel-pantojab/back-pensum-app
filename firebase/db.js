@@ -1,12 +1,12 @@
 const { database } = require("./firebaseConfig");
 const { ref, update } = require("firebase/database");
 
-async function agregarCarrera({ sis, nombre, totalMateias, totalNiveles }) {
+async function agregarCarrera({ sis, nombre, totalMaterias, totalNiveles }) {
   try {
-    return update(ref(database, "carreras/"), {
+    return await update(ref(database, "carreras/"), {
       [sis]: {
         nombre,
-        totalMateias,
+        totalMaterias,
         totalNiveles,
       },
     });
@@ -17,7 +17,7 @@ async function agregarCarrera({ sis, nombre, totalMateias, totalNiveles }) {
 
 async function crearHorariosCarrera({ sis, horarios }) {
   try {
-    update(ref(database, "carreras/" + sis), {
+    return await update(ref(database, "carreras/" + sis), {
       horarios,
     });
   } catch (error) {
@@ -27,7 +27,7 @@ async function crearHorariosCarrera({ sis, horarios }) {
 
 async function crearNivelesCarrera({ sis, niveles }) {
   try {
-    update(ref(database, "carreras/" + sis), {
+    return await update(ref(database, "carreras/" + sis), {
       niveles,
     });
   } catch (error) {
@@ -35,9 +35,9 @@ async function crearNivelesCarrera({ sis, niveles }) {
   }
 }
 
-function actualizarInfoCarrera({ sis, info }) {
+async function actualizarInfoCarrera({ sis, info }) {
   try {
-    update(ref(database, "carreras/" + sis), {
+    return await update(ref(database, "carreras/" + sis), {
       ...info,
     });
   } catch (error) {

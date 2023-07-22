@@ -28,6 +28,7 @@ async function subirCarrera({
     sis,
     niveles: levels,
   });
+  return "Carrera subida con exito :)";
 }
 
 module.exports = {
