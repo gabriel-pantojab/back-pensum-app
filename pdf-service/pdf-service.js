@@ -63,7 +63,7 @@ function getNameCarrera(contentWithoutSpaces, index) {
 }
 
 // Ejecutar la función de lectura del PDF
-async function getPdfToJson(path) {
+async function convertPdfToJson(path) {
   const subjectsInfoPDF = await readPDF(path);
 
   const subjectsInfo = subjectsInfoPDF.map((subjectInfoPDF) =>
@@ -239,5 +239,5 @@ function subjectFormat(subjectInfoPDF) {
 }
 
 module.exports = {
-  getPdfToJson,
+  convertPdfToJson,
 };
