@@ -1,3 +1,4 @@
+const { database } = require("./firebaseConfig");
 const { ref, update } = require("firebase/database");
 
 async function agregarCarrera({ sis, nombre, totalMateias, totalNiveles }) {
