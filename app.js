@@ -22,7 +22,7 @@ async function uploadCaeer() {
       gestion,
     });
 
-    const { levels, schedules } = getSchedulesAndPensum(
+    const { levels, schedules } = await getSchedulesAndPensum(
       `./careers-datas-json/${gestion}/${nameFileJson}.json`
     );
 
@@ -47,7 +47,7 @@ async function updateSchedulesCareer(path_pdf = PATH_PDF) {
       gestion,
     });
 
-    const { schedules } = getSchedulesAndPensum(
+    const { schedules } = await getSchedulesAndPensum(
       `./careers-datas-json/${gestion}/${nameFileJson}.json`
     );
 

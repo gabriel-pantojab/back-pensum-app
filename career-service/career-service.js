@@ -1,15 +1,15 @@
-const fs = require("fs");
+const fs = require("node:fs/promises");
 
-const readSchedules = (path) => {
-  const pensum = fs.readFileSync(path, "utf8");
-  return JSON.parse(pensum);
+const readSchedules = async (path) => {
+  const schedules = await fs.readFile(path, "utf8");
+  return JSON.parse(schedules);
 };
 
-function getSchedulesAndPensum(path) {
-  const pensum = readSchedules(path);
-  let pensumFormat = [];
-  Object.keys(pensum).forEach((nivel) => {
-    const materiasPensum = pensum[nivel];
+const getSchedules = async ({ path }) => {
+  const schedules = await readSchedules(path);
+  let schedulesFormat = [];
+  Object.keys(schedules).forEach((nivel) => {
+    const materiasPensum = schedules[nivel];
     let materias = [];
     materiasPensum.forEach((materia) => {
       const grupos = materia.grupos.map((grupo) => {
@@ -37,13 +37,17 @@ function getSchedulesAndPensum(path) {
         grupos,
       });
     });
-    pensumFormat.push({
+    schedulesFormat.push({
       nombreNivel: nivel,
       materias,
     });
   });
+  return { schedulesFormat };
+};
+
+const getPensum = ({ schedules }) => {
   let levels = [];
-  pensumFormat.forEach((nivel, index) => {
+  schedules.forEach((nivel, index) => {
     const nameNivel = nivel.nombreNivel;
     const idNivel = index + 1;
     const materias = nivel.materias;
@@ -63,9 +67,17 @@ function getSchedulesAndPensum(path) {
       subjects,
     });
   });
+  return { levels };
+};
+
+async function getSchedulesAndPensum(path) {
+  let { schedulesFormat } = await getSchedules({ path });
+
+  let { levels } = getPensum({ schedules: schedulesFormat });
+
   return {
     levels,
-    schedules: pensumFormat,
+    schedules: schedulesFormat,
   };
 }
 
