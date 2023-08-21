@@ -1,7 +1,7 @@
 const fs = require("node:fs/promises");
 const { convertPdfToJson } = require("../pdf-service/pdf-service");
 
-async function generateInfoCareer({ pathPDF, gestion }) {
+async function generateSchedulesCareer({ pathPDF, gestion }) {
   try {
     const { nameFileJson, content } = await convertPdfToJson(pathPDF);
 
@@ -14,10 +14,10 @@ async function generateInfoCareer({ pathPDF, gestion }) {
       nameFileJson,
     };
   } catch (error) {
-    console.log("Error in generateInfoCareer: ", error);
+    console.log("Error al generar los horarios: ", error);
   }
 }
 
 module.exports = {
-  generateInfoCareer,
+  generateSchedulesCareer,
 };

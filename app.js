@@ -1,5 +1,7 @@
 require("dotenv").config();
-const { generateInfoCareer } = require("./career-service/generateInfoCareer");
+const {
+  generateSchedulesCareer,
+} = require("./career-service/generateSchedulesCareer");
 const { getSchedulesAndPensum } = require("./career-service/career-service");
 const { subirCarrera } = require("./firebase/main");
 const { actualizarHorariosCarrera } = require("./firebase/db");
@@ -15,7 +17,7 @@ const PATH_PDF = `./schedules-pdf/${gestion}/${nameFilePDF}.pdf`;
 
 async function uploadCaeer() {
   try {
-    const { nameFileJson } = await generateInfoCareer({
+    const { nameFileJson } = await generateSchedulesCareer({
       pathPDF: PATH_PDF,
       gestion,
     });
@@ -40,7 +42,7 @@ async function uploadCaeer() {
 
 async function updateSchedulesCareer(path_pdf = PATH_PDF) {
   try {
-    const { nameFileJson } = await generateInfoCareer({
+    const { nameFileJson } = await generateSchedulesCareer({
       pathPDF: PATH_PDF,
       gestion,
     });
