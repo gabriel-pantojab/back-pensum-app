@@ -25,6 +25,16 @@ async function crearHorariosCarrera({ sis, horarios }) {
   }
 }
 
+async function actualizarHorariosCarrera({ sis, horarios }) {
+  try {
+    return await update(ref(database, "carreras/" + sis), {
+      horarios,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 async function crearNivelesCarrera({ sis, niveles }) {
   try {
     return await update(ref(database, "carreras/" + sis), {
@@ -50,4 +60,5 @@ module.exports = {
   crearHorariosCarrera,
   crearNivelesCarrera,
   actualizarInfoCarrera,
+  actualizarHorariosCarrera,
 };
