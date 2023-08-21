@@ -83,4 +83,5 @@ async function getSchedulesAndPensum(path) {
 
 module.exports = {
   getSchedulesAndPensum,
+  getSchedules,
 };
